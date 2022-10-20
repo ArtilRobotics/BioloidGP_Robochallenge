@@ -1,0 +1,30 @@
+import time, sys, serial
+
+#GBController = serial.Serial('/dev/tty.usbserial-A5052PWK',57600, serial.EIGHTBITS, serial.PARITY_NONE ,serial.STOPBITS_ONE)
+GBController = serial.Serial('/dev/ttyUSB0',57600, serial.EIGHTBITS, serial.PARITY_NONE ,serial.STOPBITS_ONE)
+
+def sendPacket(dato):
+    a = dato
+    b = 255-dato
+    intlist = [255, 85, a, b, 0, 255]
+    bytelist = bytes(intlist)   
+    print(bytelist)
+    GBController.write(bytelist)
+    time.sleep(0.030303030303030303) 
+
+
+#sendPacket(2) # 2 ENCENDER LED
+#time.sleep(2)
+#sendPacket(1) # 1 APAGAR LED
+
+Valsend=0
+while(Valsend>=0 and Valsend<=255):
+    Valinput=input()
+    Valsend=int(Valinput)
+    
+    if(Valsend>=0 and Valsend<=255):
+        print(Valsend)
+        sendPacket(Valsend)
+    else: print("Valor incorrecto (0 - 255)")
+
+GBController.close

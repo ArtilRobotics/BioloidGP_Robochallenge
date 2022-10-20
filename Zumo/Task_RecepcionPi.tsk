@@ -1,0 +1,88 @@
+﻿version 3.00
+cm_version 1.0
+platform CM-530
+o main
+o begin
+o load param_dest:var:Initial param_src:bool_num:1
+o load param_dest:motion:1:50 param_src:dec_num:1
+o while(1)
+o begin
+o load param_dest:var:haydato param_src:cm:2
+o if param_src:var:haydato lop:== param_src:dec_num:1 rop:then
+o begin
+o load param_dest:var:ReceivData param_src:cm:1
+o if param_src:var:ReceivData lop:== param_src:dec_num:1 rop:&& param_src:aux:6:64 lop:< param_src:dec_num:200 rop:then
+o begin
+o call faddr_dest:Exit
+o load param_dest:motion:1:50 param_src:dec_num:3
+o load param_dest:cm:5 param_src:timer_num:25
+o call faddr_dest:Exit
+o end
+o elseif param_src:var:ReceivData lop:== param_src:dec_num:0 rop:then
+o begin
+o call faddr_dest:Exit
+o end
+o elseif param_src:var:ReceivData lop:== param_src:dec_num:2 rop:then
+o begin
+o call faddr_dest:Exit
+o load param_dest:motion:1:50 param_src:dec_num:13
+o load param_dest:cm:5 param_src:timer_num:25
+o call faddr_dest:Exit
+o end
+o elseif param_src:var:ReceivData lop:== param_src:dec_num:3 rop:then
+o begin
+o call faddr_dest:Exit
+o load param_dest:motion:1:50 param_src:dec_num:50
+o end
+o elseif param_src:var:ReceivData lop:== param_src:dec_num:4 rop:then
+o begin
+o call faddr_dest:Exit
+o load param_dest:motion:1:50 param_src:dec_num:49
+o end
+o elseif param_src:var:ReceivData lop:== param_src:dec_num:5 rop:then
+o begin
+o load param_dest:cm:18 param_src:buzzertime_num:255
+o load param_dest:cm:17 param_src:melody_num:2
+o load param_dest:aux:5:66 param_src:led_num:0
+o end
+o elseif param_src:var:ReceivData lop:== param_src:dec_num:6 rop:then
+o begin
+o load param_dest:cm:18 param_src:buzzertime_num:255
+o load param_dest:cm:17 param_src:melody_num:3
+o load param_dest:aux:5:66 param_src:led_num:2
+o end
+o end
+o end
+o end
+- 
+o // param_text:FUNCIONES PREDEFINIDAS
+- 
+o function faddr_src:BlinkingHeadLED
+o begin
+o load param_dest:aux:5:67 param_src:port_num:1
+o if param_src:cm:5 lop:== param_src:timer_num:0 rop:then
+o begin
+o load param_dest:aux:5:67 param_src:port_num:0
+o load param_dest:cm:5 param_src:timer_num:4
+o end
+o end
+- 
+o function faddr_src:Exit
+o begin
+o load param_dest:motion:1:50 param_src:dec_num:0
+o call faddr_dest:MotionReady
+o end
+o function faddr_src:Abort
+o begin
+o load param_dest:motion:1:50 param_src:dec_num:-1
+o call faddr_dest:MotionReady
+o end
+o function faddr_src:MotionReady
+o begin
+o wait param_src:motion:1:51 lop:== param_src:bool_num:1 rop:then
+o end
+- 
+o function faddr_src:TimerReady
+o begin
+o wait param_src:cm:5 lop:> param_src:timer_num:0 rop:then
+o end
