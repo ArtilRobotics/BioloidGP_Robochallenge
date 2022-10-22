@@ -9,4 +9,4 @@ Una vez terminado, se carga el archivo de la secuencia de movimientos que se enc
 
 ### Funcionamiento
 
-
+![Funcionamiento Escalones](https://github.com/ArtilRobotics/BioloidGP_Robochallenge/blob/main/Archivos%20Generales/Imagenes/Robot2.gif)
